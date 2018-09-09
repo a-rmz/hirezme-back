@@ -1,17 +1,18 @@
 const request = require('supertest');
-const mongoose = require('mongoose');
-const server = require('../../src/app');
+const http = require('http');
+const app = require('../../src/app');
 const { validateApplication } = require('../../src/schemas');
 
-// close the server after each test
+let server;
+
+beforeEach(() => {
+  server = http.createServer(app.callback()).listen(process.env.PORT || 3000);
+});
+
 afterEach(() => {
   server.close();
 });
 
-afterAll(() => {
-  mongoose.connection.close();
-  server.close();
-});
 
 describe('routes: applications', () => {
   describe('GET /applications', () => {
