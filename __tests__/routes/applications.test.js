@@ -28,7 +28,7 @@ describe('routes: applications', () => {
     });
   });
 
-  describe('GET /application/:id', () => {
+  describe('GET /applications/:id', () => {
     test('should return the application with the given id', async () => {
       const response = await request(server)
         .get('/api/v1/applications/448e9c60-b3a6-11e8-825e-f1f43d9e926e');
@@ -133,7 +133,7 @@ describe('routes: applications', () => {
     });
   });
 
-  describe('DELETE /application/:id', () => {
+  describe('DELETE /applications/:id', () => {
     test('should delete the object', async () => {
       const response = await request(server)
         .delete('/api/v1/applications/448e9c60-b3a6-11e8-825e-f1f43d9e926e');
