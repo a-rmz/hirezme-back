@@ -55,8 +55,23 @@ router.get('/:id', async (ctx) => {
   }
 });
 
-router.put('/:id', (ctx) => {
-  ctx.status = 200;
+router.put('/:id', validateApplicationBody);
+router.put('/:id', async (ctx) => {
+  try {
+    const { body } = ctx.request;
+    const { id } = ctx.params;
+
+    const result = await ApplicationController.updateApplication(id, body);
+
+    if (result) {
+      ctx.status = 200;
+      ctx.body = result;
+    } else {
+      throw new Error('Result not found');
+    }
+  } catch (err) {
+    ctx.throw(404, 'The selected application does not exist');
+  }
 });
 
 router.delete('/', (ctx) => {
