@@ -10,6 +10,10 @@ class ApplicationController {
     return { data: applications };
   }
 
+  static async getApplicationById(id) {
+    return applicationModel.findById(id, { __v: 0 });
+  }
+
   static async createApplication(body) {
     return applicationModel.create(body);
   }
