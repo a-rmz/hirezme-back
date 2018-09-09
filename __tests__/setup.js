@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const ApplicationModel = require('../src/models/application');
 const CompanyModel = require('../src/models/company');
 
@@ -42,4 +43,8 @@ afterEach(async () => {
   await CompanyModel.deleteMany({});
 });
 
-afterAll(done => done());
+afterAll(async (done) => {
+  await mongoose.connection.close();
+  await mongoose.disconnect();
+  done();
+});
