@@ -28,13 +28,14 @@ router.post('/', async (ctx) => {
   }
 });
 
-router.get('/:id', async (ctx, next) => {
+router.all('/:id', async (ctx, next) => {
   const { id } = ctx.params;
   if (isUUID(id)) {
     return next();
   }
   ctx.throw(400, 'The provided id is not a uuid-v1');
 });
+
 router.get('/:id', async (ctx) => {
   try {
     ctx.status = 200;
