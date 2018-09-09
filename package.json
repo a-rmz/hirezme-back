@@ -10,6 +10,12 @@
     "test": "./node_modules/.bin/jest",
     "test:coverage": "./node_modules/.bin/jest --coverage"
   },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./__tests__/setup.js",
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/setup.js"
+    ]
+  },
   "author": "Alex Ramirez <armzprz@gmail.com>",
   "license": "UNLICENSED",
   "dependencies": {
