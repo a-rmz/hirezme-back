@@ -17,6 +17,14 @@ class ApplicationController {
   static async createApplication(body) {
     return applicationModel.create(body);
   }
+
+  static async updateApplication(id, body) {
+    const options = {
+      // new: bool - true to return the modified document rather than the original.
+      new: true,
+    };
+    return applicationModel.findByIdAndUpdate(id, body, options);
+  }
 }
 
 module.exports = ApplicationController;
