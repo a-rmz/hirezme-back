@@ -22,7 +22,7 @@ router.post('/', async (ctx) => {
   try {
     const application = await ApplicationController.createApplication(ctx.request.body);
     ctx.status = 201;
-    return ctx.body = application;
+    ctx.body = application;
   } catch (err) {
     ctx.throw(500, err);
   }
