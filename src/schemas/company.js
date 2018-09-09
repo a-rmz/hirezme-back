@@ -15,7 +15,7 @@ const companySchema = {
       country: { type: 'string' },
     },
   },
-  required: ['name', 'url', 'location'],
+  additionalProperties: false,
 };
 
 module.exports = companySchema;

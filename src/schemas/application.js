@@ -29,7 +29,7 @@ const applicationSchema = {
       format: 'customDate',
     },
   },
-  required: ['name', 'url', 'status', 'dateSent'],
+  additionalProperties: false,
 };
 
 module.exports = applicationSchema;
