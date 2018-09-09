@@ -28,7 +28,9 @@ describe('routes: applications', () => {
         validateApplication(response.body.data[0]).valid,
       ).toBeTruthy();
     });
+  });
 
+  describe('GET /application/:id', () => {
     test('should return the application with the given id', async () => {
       const response = await request(server)
         .get('/api/v1/applications/448e9c60-b3a6-11e8-825e-f1f43d9e926e');
