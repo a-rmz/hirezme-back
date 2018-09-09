@@ -75,8 +75,19 @@ router.put('/:id', async (ctx) => {
   }
 });
 
-router.delete('/', (ctx) => {
-  ctx.status = 200;
+router.delete('/:id', async (ctx) => {
+  try {
+    const { id } = ctx.params;
+    const result = await ApplicationController.removeApplication(id);
+
+    if (result) {
+      ctx.status = 204;
+    } else {
+      throw new Error('Result not found');
+    }
+  } catch (err) {
+    ctx.throw(404, 'The selected application does not exist');
+  }
 });
 
 module.exports = router;

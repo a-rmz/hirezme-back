@@ -25,6 +25,10 @@ class ApplicationController {
     };
     return applicationModel.findByIdAndUpdate(id, body, options);
   }
+
+  static async removeApplication(id) {
+    return applicationModel.findByIdAndRemove(id);
+  }
 }
 
 module.exports = ApplicationController;
