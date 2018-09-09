@@ -43,7 +43,8 @@ router.all('/:id', async (ctx, next) => {
 
 router.get('/:id', async (ctx) => {
   try {
-    const result = await ApplicationController.getApplicationById(ctx.params.id);
+    const { id } = ctx.params;
+    const result = await ApplicationController.getApplicationById(id);
     if (Object.keys(result).length === 0) {
       throw new Error('Result not found');
     } else {
