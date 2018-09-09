@@ -25,7 +25,7 @@ describe('routes: applications', () => {
       expect(Array.isArray(response.body.data)).toBeTruthy();
       expect(response.body.data).not.toHaveLength(0);
       expect(
-        validateApplication(response.body.data[0]),
+        validateApplication(response.body.data[0]).valid,
       ).toBeTruthy();
     });
   });
