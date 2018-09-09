@@ -1,4 +1,7 @@
-/* eslint no-underscore-dangle: 0 */
+/* eslint
+  no-underscore-dangle: 0
+  no-unused-vars: ["error", { "argsIgnorePattern": "^_" }]
+*/
 const mongoose = require('mongoose');
 const uuid = require('uuid/v1');
 
@@ -26,7 +29,7 @@ const ApplicationSchema = new Schema({
 });
 
 ApplicationSchema.set('toObject', {
-  transform(doc, ret, options) {
+  transform(_doc, ret, _options) {
     const newObj = ret;
     newObj.id = ret._id;
     delete newObj._id;

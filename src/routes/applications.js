@@ -10,7 +10,7 @@ const validateApplicationBody = (ctx, next) => {
   if (result.valid) {
     return next();
   }
-  ctx.throw(400, JSON.stringify({ errors: result.errors }));
+  return ctx.throw(400, JSON.stringify({ errors: result.errors }));
 };
 
 
@@ -27,7 +27,8 @@ router.post('/', async (ctx) => {
     ctx.body = application;
   } catch (err) {
     if (err.name === 'ValidationError') {
-      return ctx.throw(400, JSON.stringify({ errors: Object.values(err.errors) }));
+      ctx.throw(400, JSON.stringify({ errors: Object.values(err.errors) }));
+      return;
     }
     ctx.throw(500, err);
   }
@@ -38,7 +39,7 @@ router.all('/:id', async (ctx, next) => {
   if (isUUID(id)) {
     return next();
   }
-  ctx.throw(400, 'The provided id is not a uuid-v1');
+  return ctx.throw(400, 'The provided id is not a uuid-v1');
 });
 
 router.get('/:id', async (ctx) => {
