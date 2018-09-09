@@ -26,6 +26,9 @@ router.post('/', async (ctx) => {
     ctx.status = 201;
     ctx.body = application;
   } catch (err) {
+    if (err.name === 'ValidationError') {
+      return ctx.throw(400, JSON.stringify({ errors: Object.values(err.errors) }));
+    }
     ctx.throw(500, err);
   }
 });
