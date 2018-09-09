@@ -74,7 +74,7 @@ describe('routes: applications', () => {
       expect(validateApplication(response.body).valid).toBeTruthy();
     });
 
-    test('should return a list of errors', async () => {
+    test('should return a list of format errors', async () => {
       const response = await request(server)
         .post('/api/v1/applications')
         .send({
