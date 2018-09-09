@@ -5,7 +5,12 @@ const applicationSchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     url: { type: 'string' },
-    company: { type: 'string' },
+    company: {
+      anyOf: [
+        { type: 'string' },
+        { $ref: '/Company' },
+      ],
+    },
     tags: {
       type: 'array',
       items: { type: 'string' },
