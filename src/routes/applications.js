@@ -21,7 +21,6 @@ router.get('/', async (ctx) => {
 
 router.post('/', validateApplicationBody);
 router.post('/', async (ctx) => {
-  ctx.status = 201;
   try {
     const application = await ApplicationController.createApplication(ctx.request.body);
     ctx.status = 201;
