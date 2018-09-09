@@ -4,14 +4,14 @@ const companyModel = require('../models/company');
 class ApplicationController {
   static async getApplications() {
     const applications = await applicationModel
-      .find({}, { __v: 0 })
+      .find()
       .populate('company');
 
     return { data: applications };
   }
 
   static async getApplicationById(id) {
-    return applicationModel.findById(id, { __v: 0 });
+    return applicationModel.findById(id);
   }
 
   static async createApplication(body) {

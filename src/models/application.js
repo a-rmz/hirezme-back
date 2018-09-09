@@ -1,3 +1,4 @@
+/* eslint no-underscore-dangle: 0 */
 const mongoose = require('mongoose');
 const uuid = require('uuid/v1');
 
@@ -10,7 +11,7 @@ const ApplicationSchema = new Schema({
   company: {
     type: String,
     ref: 'Company',
-    // required: true,
+    required: true,
   },
   tags: [{ type: String }],
   status: {
@@ -22,6 +23,16 @@ const ApplicationSchema = new Schema({
   dateSent: { type: Date, default: Date.now, required: true },
   dateReplied: { type: Date },
   dateRejected: { type: Date },
+});
+
+ApplicationSchema.set('toObject', {
+  transform(doc, ret, options) {
+    const newObj = ret;
+    newObj.id = ret._id;
+    delete newObj._id;
+    delete newObj.__v;
+    return ret;
+  },
 });
 
 module.exports = mongoose.model('Application', ApplicationSchema);

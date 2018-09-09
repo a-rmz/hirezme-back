@@ -1,3 +1,4 @@
+/* eslint no-underscore-dangle: 0 */
 const mongoose = require('mongoose');
 const uuid = require('uuid/v1');
 
@@ -12,6 +13,16 @@ const CompanySchema = new Schema({
     address: { type: String },
     city: { type: String, require: true },
     country: { type: String, require: true },
+  },
+});
+
+CompanySchema.set('toObject', {
+  transform(doc, ret, options) {
+    const newObj = ret;
+    newObj.id = ret._id;
+    delete newObj._id;
+    delete newObj.__v;
+    return ret;
   },
 });
 
