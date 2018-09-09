@@ -3,8 +3,6 @@ const mongoose = require('mongoose');
 const server = require('../../src/app');
 const { validateApplication } = require('../../src/schemas');
 
-const applicationsMock = require('../../__mocks__/applications');
-
 // close the server after each test
 afterEach(() => {
   server.close();
