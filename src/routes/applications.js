@@ -5,18 +5,21 @@ const { validateApplication } = require('../schemas');
 
 const router = new Router();
 
-router.get('/', async (ctx) => {
-  ctx.status = 200;
-  ctx.body = await ApplicationController.getApplications();
-});
-
-router.post('/', (ctx, next) => {
+const validateApplicationBody = (ctx, next) => {
   const result = validateApplication(ctx.request.body);
   if (result.valid) {
     return next();
   }
   ctx.throw(400, JSON.stringify({ errors: result.errors }));
+};
+
+
+router.get('/', async (ctx) => {
+  ctx.status = 200;
+  ctx.body = await ApplicationController.getApplications();
 });
+
+router.post('/', validateApplicationBody);
 router.post('/', async (ctx) => {
   ctx.status = 201;
   try {
