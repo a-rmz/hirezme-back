@@ -132,4 +132,29 @@ describe('routes: applications', () => {
       expect(response.error.text).toEqual('The provided id is not a uuid-v1');
     });
   });
+
+  describe('DELETE /application/:id', () => {
+    test('should delete the object', async () => {
+      const response = await request(server)
+        .delete('/api/v1/applications/448e9c60-b3a6-11e8-825e-f1f43d9e926e');
+
+      expect(response.statusCode).toBe(204);
+    });
+
+    test('should say that the application does not exist', async () => {
+      const response = await request(server)
+        .get('/api/v1/applications/548e9c60-b3a6-11e8-825e-f1f43d9e926e');
+
+      expect(response.statusCode).toBe(404);
+      expect(response.error.text).toEqual('The selected application does not exist');
+    });
+
+    test('should say that the id is not valid', async () => {
+      const response = await request(server)
+        .get('/api/v1/applications/fake-id');
+
+      expect(response.statusCode).toBe(400);
+      expect(response.error.text).toEqual('The provided id is not a uuid-v1');
+    });
+  });
 });
