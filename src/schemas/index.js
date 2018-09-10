@@ -11,7 +11,9 @@ validator.addSchema(applicationSchema, '/Application');
 validator.addSchema(companySchema, '/Company');
 
 const validateApplication = instance => validator.validate(instance, applicationSchema);
+const validateCompany = instance => validator.validate(instance, companySchema);
 
 module.exports = {
   validateApplication,
+  validateCompany,
 };

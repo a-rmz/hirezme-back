@@ -1,5 +1,4 @@
 const applicationModel = require('../models/application');
-const companyModel = require('../models/company');
 
 class ApplicationController {
   static async getApplications() {
