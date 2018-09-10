@@ -6,7 +6,7 @@ const { validateApplication } = require('../../src/schemas');
 let server;
 
 beforeEach(() => {
-  server = http.createServer(app.callback()).listen(process.env.PORT || 3000);
+  server = http.createServer(app.callback());
 });
 
 afterEach(() => {
