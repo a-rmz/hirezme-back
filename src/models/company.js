@@ -11,6 +11,7 @@ const CompanySchema = new Schema({
   _id: { type: String, default: uuid },
   name: { type: String, required: true },
   url: { type: String, required: true },
+  owner: { type: String, required: true },
   tags: [{ type: String }],
   location: {
     address: { type: String },

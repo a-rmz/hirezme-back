@@ -11,6 +11,7 @@ const ApplicationSchema = new Schema({
   _id: { type: String, default: uuid },
   name: { type: String, required: true },
   url: { type: String, required: true },
+  owner: { type: String, required: true },
   company: {
     type: String,
     ref: 'Company',

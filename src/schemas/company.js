@@ -5,6 +5,7 @@ const companySchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     url: { type: 'string' },
+    owner: { type: 'string' },
     tags: {
       type: 'array',
       items: { type: 'string' },

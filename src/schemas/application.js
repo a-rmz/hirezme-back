@@ -5,6 +5,7 @@ const applicationSchema = {
     id: { type: 'string' },
     name: { type: 'string' },
     url: { type: 'string' },
+    owner: { type: 'string' },
     company: {
       anyOf: [
         { type: 'string' },

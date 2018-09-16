@@ -15,8 +15,9 @@ const validateCompanyBody = (ctx, next) => {
 
 
 router.get('/', async (ctx) => {
+  const userId = ctx.state.user.id;
   ctx.status = 200;
-  ctx.body = await CompanyController.getCompanies();
+  ctx.body = await CompanyController.getCompanies(userId);
 });
 
 router.post('/', validateCompanyBody);
@@ -44,8 +45,11 @@ router.all('/:id', async (ctx, next) => {
 
 router.get('/:id', async (ctx) => {
   try {
+    const userId = ctx.state.user.id;
     const { id } = ctx.params;
-    const result = await CompanyController.getCompanyById(id);
+
+    const result = await CompanyController.getCompanyById(id, userId);
+
     if (Object.keys(result).length === 0) {
       throw new Error('Result not found');
     } else {

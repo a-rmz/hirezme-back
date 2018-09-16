@@ -1,9 +1,9 @@
 const applicationModel = require('../models/application');
 
 class ApplicationController {
-  static async getApplications() {
-    const applications = await applicationModel
-      .find()
+  static async getApplications(userId) {
+    const applications = await ApplicationModel
+      .find({ owner: userId })
       .populate('company');
 
     return { data: applications };
