@@ -5,6 +5,9 @@ const CompanyModel = require('../src/models/company');
 require('dotenv').config();
 
 process.env.MONGO_DBNAME = 'hirezme-test';
+process.env.NODE_ENV = 'testing';
+
+require('../src/db/connection');
 
 beforeEach(async () => {
   await ApplicationModel.findByIdAndUpdate(
@@ -12,6 +15,7 @@ beforeEach(async () => {
     {
       name: 'Intergalactic DevOps',
       url: 'https://thehub.fi/jobs/intergalactic-software-developer',
+      owner: 'admin',
       company: '3eee1c16-caf9-4f8d-b2cf-be6b56837a38',
       tags: ['devops', 'backend'],
       status: 'IN_PROGRESS',
@@ -23,13 +27,13 @@ beforeEach(async () => {
   await ApplicationModel.findByIdAndUpdate(
     '448e9c60-b3a6-11e8-825e-f1f43d9e926e',
     {
-      name: 'Intergalactic DevOps',
-      url: 'https://thehub.fi/jobs/intergalactic-software-developer',
-      company: '3eee1c16-caf9-4f8d-b2cf-be6b56837a38',
-      tags: ['devops', 'backend'],
+      name: 'Jr Site Reliability Engineer',
+      url: 'https://www.shazam.com/careers?gh_jid=1282205',
+      owner: 'admin',
+      company: 'fe423080-b636-11e8-9d89-8f47832682f08',
+      tags: ['devops', 'sre', 'linux'],
       status: 'IN_PROGRESS',
-      dateSent: '1536427457615',
-      dateReplied: '1536427457615',
+      dateSent: '1536427457645',
     },
     { upsert: true },
   );
@@ -39,10 +43,26 @@ beforeEach(async () => {
     {
       name: 'Montel Intergalactic',
       url: 'https://montel.fi',
+      owner: 'admin',
       location: {
         address: 'Mikonkatu 17 A, 00100',
         city: 'Helsinki',
         country: 'Finland',
+      },
+    },
+    { upsert: true },
+  );
+
+  await CompanyModel.findByIdAndUpdate(
+    'fe423080-b636-11e8-9d89-8f47832682f08',
+    {
+      name: 'Shazam',
+      url: 'http://shazam.com/',
+      owner: 'admin',
+      location: {
+        address: '26-28 Hammersmith Grove',
+        city: 'London',
+        country: 'England',
       },
     },
     { upsert: true },
