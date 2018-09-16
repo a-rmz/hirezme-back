@@ -17,6 +17,11 @@
       "<rootDir>/__tests__/setup.js"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run test:lint"
+    }
+  },
   "author": "Alex Ramirez <armzprz@gmail.com>",
   "license": "UNLICENSED",
   "dependencies": {
@@ -37,6 +42,7 @@
   "devDependencies": {
     "eslint": "^5.5.0",
     "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-plugin-import": "^2.14.0"
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^1.0.0-rc.14"
   }
 }
