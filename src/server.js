@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line
   require('dotenv').load();
 }
 

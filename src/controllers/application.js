@@ -1,4 +1,4 @@
-const applicationModel = require('../models/application');
+const ApplicationModel = require('../models/application');
 
 class ApplicationController {
   static async getApplications(userId) {
@@ -9,8 +9,8 @@ class ApplicationController {
     return { data: applications };
   }
 
-  static async getApplicationById(id) {
-    return applicationModel.findById(id);
+  static async getApplicationById(id, userId) {
+    return ApplicationModel.findOne({ _id: id, owner: userId });
   }
 
   static async createApplication(body) {
@@ -29,11 +29,11 @@ class ApplicationController {
       // new: bool - true to return the modified document rather than the original.
       new: true,
     };
-    return applicationModel.findByIdAndUpdate(id, body, options);
+    return ApplicationModel.findByIdAndUpdate(id, body, options);
   }
 
   static async removeApplication(id) {
-    return applicationModel.findByIdAndRemove(id);
+    return ApplicationModel.findByIdAndRemove(id);
   }
 }
 

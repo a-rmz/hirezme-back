@@ -1,4 +1,4 @@
-const companyModel = require('../models/company');
+const CompanyModel = require('../models/company');
 
 class CompanyController {
   static async getCompanies(userId) {
@@ -12,7 +12,7 @@ class CompanyController {
   }
 
   static async createCompany(body) {
-    return companyModel.create(body);
+    return CompanyModel.create(body);
   }
 
   static async updateCompany(id, body) {
@@ -20,11 +20,11 @@ class CompanyController {
       // new: bool - true to return the modified document rather than the original.
       new: true,
     };
-    return companyModel.findByIdAndUpdate(id, body, options);
+    return CompanyModel.findByIdAndUpdate(id, body, options);
   }
 
   static async removeCompany(id) {
-    return companyModel.findByIdAndRemove(id);
+    return CompanyModel.findByIdAndRemove(id);
   }
 }
 
