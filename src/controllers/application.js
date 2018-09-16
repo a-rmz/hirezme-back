@@ -14,7 +14,14 @@ class ApplicationController {
   }
 
   static async createApplication(body) {
-    return applicationModel.create(body);
+    try {
+      const application = await ApplicationModel.create(body);
+      return await ApplicationModel
+        .findById(application.id)
+        .populate('company');
+    } catch (err) {
+      throw err;
+    }
   }
 
   static async updateApplication(id, body) {
