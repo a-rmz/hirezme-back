@@ -1,9 +1,19 @@
 const request = require('supertest');
 const http = require('http');
-const app = require('../../src/app');
+const Koa = require('koa');
+const bodyParser = require('koa-bodyparser');
+const router = require('../../src/routes');
 const { validateCompany } = require('../../src/schemas');
 
 let server;
+const app = new Koa();
+app.use(bodyParser());
+app.use(async (ctx, next) => {
+  ctx.state.user = { id: 'admin' };
+  return next();
+});
+router.prefix('/api/v1');
+app.use(router.routes());
 
 beforeEach(() => {
   server = http.createServer(app.callback());
@@ -12,6 +22,7 @@ beforeEach(() => {
 afterEach(() => {
   server.close();
 });
+
 
 describe('routes: companies', () => {
   describe('GET /companies', () => {
@@ -61,6 +72,7 @@ describe('routes: companies', () => {
         .send({
           name: 'Montel Intergalactic',
           url: 'https://montel.fi',
+          owner: 'admin',
           location: {
             address: 'Mikonkatu 17 A, 00100',
             city: 'Helsinki',

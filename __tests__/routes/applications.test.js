@@ -1,9 +1,19 @@
 const request = require('supertest');
 const http = require('http');
-const app = require('../../src/app');
+const Koa = require('koa');
+const bodyParser = require('koa-bodyparser');
+const router = require('../../src/routes');
 const { validateApplication } = require('../../src/schemas');
 
 let server;
+const app = new Koa();
+app.use(bodyParser());
+app.use(async (ctx, next) => {
+  ctx.state.user = { id: 'admin' };
+  return next();
+});
+router.prefix('/api/v1');
+app.use(router.routes());
 
 beforeEach(() => {
   server = http.createServer(app.callback());
@@ -62,6 +72,7 @@ describe('routes: applications', () => {
         .send({
           name: 'Intergalactic DevOps',
           url: 'https://thehub.fi/jobs/intergalactic-software-developer',
+          owner: 'admin',
           tags: ['devops', 'backend'],
           status: 'IN_PROGRESS',
           dateSent: 'Sat Sep 08 2018 14:41:21 GMT-0500',
